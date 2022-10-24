@@ -45,20 +45,20 @@ final class GenerateKeyPairCommand extends Command
     /**
      * @var string|null
      */
-    private $passPhrase;
+    private $passphrase;
 
     /**
      * @var string
      */
     private $algorithm;
 
-    public function __construct(?string $privateKeyFile, ?string $publicKeyFile, ?string $passPhrase)
+    public function __construct(?string $privateKeyFile, ?string $publicKeyFile, ?string $passphrase)
     {
         parent::__construct();
 
         $this->privateKeyFile = $privateKeyFile;
         $this->publicKeyFile = $publicKeyFile;
-        $this->passPhrase = $passPhrase;
+        $this->passphrase = $passphrase;
     }
 
     protected function configure(): void
@@ -81,7 +81,7 @@ final class GenerateKeyPairCommand extends Command
             return self::FAILURE;
         }
 
-        [$privateKey, $publicKey] = $this->generateKeyPair($algorithm, $this->passPhrase);
+        [$privateKey, $publicKey] = $this->generateKeyPair($algorithm, $this->passphrase);
 
         if (true === $input->getOption('dry-run')) {
             $io->success('Your keys have been generated!');
@@ -146,7 +146,7 @@ final class GenerateKeyPairCommand extends Command
         }
     }
 
-    private function generateKeyPair(string $algorithm, ?string $passPhrase = null): array
+    private function generateKeyPair(string $algorithm, ?string $passphrase = null): array
     {
         $config = $this->buildOpenSSLConfiguration($algorithm);
         $resource = \openssl_pkey_new($config);
@@ -155,7 +155,7 @@ final class GenerateKeyPairCommand extends Command
             throw new \RuntimeException(\openssl_error_string());
         }
 
-        $success = \openssl_pkey_export($resource, $privateKey, $passPhrase);
+        $success = \openssl_pkey_export($resource, $privateKey, $passphrase);
 
         if (false === $success) {
             throw new \RuntimeException(\openssl_error_string());

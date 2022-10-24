@@ -18,7 +18,7 @@ class JsonSecretType extends JsonType
         return $platform->getClobTypeDeclarationSQL($fieldDeclaration);
     }
 
-    public function convertToDatabaseValueSQL($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         $value = parent::convertToDatabaseValue($value, $platform);
 
