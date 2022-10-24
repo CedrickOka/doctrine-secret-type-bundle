@@ -1,0 +1,74 @@
+framework:
+    test: true
+    secret: 'secret'
+    default_locale: 'fr'
+    session:
+        storage_id: session.storage.mock_file
+    php_errors:
+        log: true
+
+    cache:
+        # Put the unique name of your app here: the prefix seed
+        # is used to compute stable namespaces for cache keys.
+        #prefix_seed: your_vendor_name/app_name
+
+        # The app cache caches to the filesystem by default.
+        # Other options include:
+
+        # Redis
+        #app: cache.adapter.redis
+        #default_redis_provider: redis://localhost
+
+        # APCu (not recommended with heavy random-write workloads as memory fragmentation can cause perf issues)
+        #app: cache.adapter.apcu
+
+doctrine:
+    dbal:
+        types:
+            string_secret: 'Oka\Doctrine\SecretTypeBundle\Types\DBAL\StringSecretType'
+            json_secret: 'Oka\Doctrine\SecretTypeBundle\Types\DBAL\JsonSecretType'
+        connections:
+            default:
+                driver: 'pdo_sqlite'
+                url: '%env(resolve:DATABASE_URL)%'
+                mapping_types:
+                    string_secret: text
+                    json_secret: text
+    orm:
+        auto_generate_proxy_classes: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_mapping: true
+        mappings:
+            App:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/tests/Entity'
+                prefix: 'Oka\Doctrine\SecretTypeBundle\Tests\Entity'
+                alias: App
+
+doctrine_mongodb:
+    types:
+        string_secret: 'Oka\Doctrine\SecretTypeBundle\Types\ODM\MongoDB\StringSecretType'
+        hash_secret: 'Oka\Doctrine\SecretTypeBundle\Types\ODM\MongoDB\HashSecretType'
+    auto_generate_proxy_classes: true
+    auto_generate_hydrator_classes: true
+    connections:
+        default:
+            server: '%env(resolve:MONGODB_URL)%'
+            options: {}
+    default_database: '%env(resolve:MONGODB_DB)%'
+    document_managers:
+        default:
+            auto_mapping: true
+            mappings:
+                App:
+                    is_bundle: false
+                    type: annotation
+                    dir: '%kernel.project_dir%/tests/Document'
+                    prefix: 'Oka\Doctrine\SecretTypeBundle\Tests\Document'
+                    alias: App
+
+oka_doctrine_secret_type:
+    private_key_file: '%env(resolve:COKA_SECRET_TYPE_PRIVATE_KEY_FILE)%'
+    public_key_file: '%env(resolve:COKA_SECRET_TYPE_PUBLIC_KEY_FILE)%'
+    passphrase: '%env(COKA_SECRET_TYPE_PASSPHRASE)%'

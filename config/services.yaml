@@ -1,0 +1,8 @@
+services:
+    oka_doctrine_secret_type.generate_key_pair.console_command:
+        class: Oka\Doctrine\SecretTypeBundle\Command\GenerateKeyPairCommand
+        arguments:
+          - '%oka_doctrine_secret_type.private_key_file%'
+          - '%oka_doctrine_secret_type.public_key_file%'
+          - '%oka_doctrine_secret_type.passphrase%'
+        tags: ['console.command']

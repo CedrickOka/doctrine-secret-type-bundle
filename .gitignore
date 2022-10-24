@@ -1,0 +1,35 @@
+### Composer ###
+
+.phpunit.*
+composer.lock
+composer.phar
+/var/
+/vendor/
+
+### PHPUnit ###
+.phpunit.result.cache
+/phpunit.xml
+
+### friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+
+### Eclipse ###
+
+bin/
+tmp/
+*.tmp
+*.bak
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+# PDT-specific (PHP Development Tools)
+.buildpath
+
+### Eclipse Patch ###
+
+# Eclipse Core		
+.project

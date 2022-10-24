@@ -1,0 +1,66 @@
+{
+	"name": "coka/doctrine-secret-type-bundle",
+	"type": "symfony-bundle",
+	"license": "MIT",
+	"description": "Doctrine custom type which allows to encrypt value",
+	"keywords": [
+		"doctrine",
+		"type",
+		"openssl",
+		"encryption"
+	],
+	"authors": [{
+			"name": "Cedrick Oka Baidai",
+			"email": "okacedrick@gmail.com"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Oka\\Doctrine\\SecretTypeBundle\\": "src/"
+		},
+		"exclude-from-classmap": [
+			"/tests/"
+		]
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Oka\\Doctrine\\SecretTypeBundle\\Tests\\": "tests/"
+		}
+	},
+	"require": {
+		"php": ">=7.4",
+		"symfony/config": "5.4.*",
+		"symfony/console": "5.4.*",
+		"symfony/dependency-injection": "5.4.*",
+		"symfony/filesystem": "5.4.*",
+		"symfony/http-kernel": "5.4.*",
+		"symfony/yaml": "5.4.*"
+	},
+	"require-dev": {
+		"doctrine/doctrine-bundle": "^2.7",
+		"doctrine/doctrine-migrations-bundle": "^3.2",
+		"doctrine/mongodb-odm-bundle": "^4.5",
+		"doctrine/orm": "^2.13",
+		"friendsofphp/php-cs-fixer": "^3",
+		"symfony/framework-bundle": "5.4.*",
+		"symfony/phpunit-bridge": "5.4.*",
+		"symfony/proxy-manager-bridge": "^5.4"
+	},
+	"config": {
+		"sort-packages": true
+	},
+	"scripts": {
+		"php-cs-fixer": "php-cs-fixer fix --config=.php-cs-fixer.dist.php -v --dry-run --stop-on-violation --using-cache=no"
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "0.x.x-dev"
+		},
+		"symfony": {
+			"allow-contrib": "true"
+		}
+	},
+	"support": {
+		"docs": "https://github.com/CedrickOka/doctrine-secret-type-bundle/blob/master/docs/index.md"
+	}
+}
