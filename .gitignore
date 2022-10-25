@@ -1,5 +1,7 @@
-### Composer ###
+### Certificates ###
+/config/coka_doctrine_secret_type
 
+### Composer ###
 .phpunit.*
 composer.lock
 composer.phar
@@ -15,7 +17,6 @@ composer.phar
 /.php-cs-fixer.cache
 
 ### Eclipse ###
-
 bin/
 tmp/
 *.tmp

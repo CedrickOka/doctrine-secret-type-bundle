@@ -23,7 +23,7 @@
 		<env name="MONGODB_DB" value="db_name"/>
 		<env name="COKA_SECRET_TYPE_PRIVATE_KEY_FILE" value="%kernel.project_dir%/config/coka_doctrine_secret_type/private.pem"/>
 		<env name="COKA_SECRET_TYPE_PUBLIC_KEY_FILE" value="%kernel.project_dir%/config/coka_doctrine_secret_type/public.pem"/>
-		<env name="COKA_SECRET_TYPE_PASSPHRASE" value="67014dbea424d2f34cf74071fe45b4a1"/>
+		<env name="COKA_SECRET_TYPE_PASSPHRASE" value="2c50386cee0fe33ca8dcd0e7c4a7a008"/>
 	</php>
 
 	<testsuites>

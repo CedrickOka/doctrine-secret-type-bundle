@@ -6,3 +6,4 @@ services:
           - '%oka_doctrine_secret_type.public_key_file%'
           - '%oka_doctrine_secret_type.passphrase%'
         tags: ['console.command']
+
