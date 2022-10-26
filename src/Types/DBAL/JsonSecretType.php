@@ -13,12 +13,12 @@ class JsonSecretType extends JsonType
 {
     use SecretTypeTrait;
 
-    public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
+    public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform): string
     {
         return $platform->getClobTypeDeclarationSQL($fieldDeclaration);
     }
 
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
         $value = parent::convertToDatabaseValue($value, $platform);
 
@@ -29,7 +29,7 @@ class JsonSecretType extends JsonType
         return $this->encrypt($value);
     }
 
-    public function convertToPHPValue($value, AbstractPlatform $platform)
+    public function convertToPHPValue($value, AbstractPlatform $platform): ?array
     {
         if (null === $value || '' === $value) {
             return null;
@@ -43,12 +43,12 @@ class JsonSecretType extends JsonType
         return ['text'];
     }
 
-    public function getName()
+    public function getName(): string
     {
         return 'json_secret';
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform)
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         return true;
     }

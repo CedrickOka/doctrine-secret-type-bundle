@@ -12,12 +12,12 @@ class StringSecretType extends StringType
 {
     use SecretTypeTrait;
 
-    public function convertToDatabaseValue($value)
+    public function convertToDatabaseValue($value): ?string
     {
         return null === $value || '' === $value ? null : $this->encrypt($value);
     }
 
-    public function convertToPHPValue($value)
+    public function convertToPHPValue($value): ?string
     {
         return null !== $value ? $this->decrypt($value) : null;
     }
@@ -28,7 +28,7 @@ class StringSecretType extends StringType
 				$return = (string) $type->convertToPHPValue($value);';
     }
 
-    public function getName()
+    public function getName(): string
     {
         return 'string_secret';
     }

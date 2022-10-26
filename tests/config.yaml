@@ -69,6 +69,6 @@ doctrine_mongodb:
                     alias: App
 
 oka_doctrine_secret_type:
-    private_key_file: '%env(resolve:COKA_SECRET_TYPE_PRIVATE_KEY_FILE)%'
-    public_key_file: '%env(resolve:COKA_SECRET_TYPE_PUBLIC_KEY_FILE)%'
-    passphrase: '%env(COKA_SECRET_TYPE_PASSPHRASE)%'
+    private_key_file: '%env(resolve:OKA_SECRET_TYPE_PRIVATE_KEY_FILE)%'
+    public_key_file: '%env(resolve:OKA_SECRET_TYPE_PUBLIC_KEY_FILE)%'
+    passphrase: '%env(OKA_SECRET_TYPE_PASSPHRASE)%'

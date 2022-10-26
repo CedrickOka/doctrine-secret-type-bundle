@@ -13,7 +13,7 @@ class StringSecretType extends TextType
 {
     use SecretTypeTrait;
 
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
         if (null === $value || '' === $value) {
             return null;
@@ -22,7 +22,7 @@ class StringSecretType extends TextType
         return parent::convertToDatabaseValue($this->encrypt($value), $platform);
     }
 
-    public function convertToPHPValue($value, AbstractPlatform $platform)
+    public function convertToPHPValue($value, AbstractPlatform $platform): ?string
     {
         $value = parent::convertToPHPValue($value, $platform);
 
@@ -38,7 +38,7 @@ class StringSecretType extends TextType
         return ['text'];
     }
 
-    public function getName()
+    public function getName(): string
     {
         return 'string_secret';
     }

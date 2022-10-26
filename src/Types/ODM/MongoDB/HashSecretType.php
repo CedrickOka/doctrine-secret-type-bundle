@@ -13,7 +13,7 @@ class HashSecretType extends Type
 {
     use SecretTypeTrait;
 
-    public function convertToDatabaseValue($value)
+    public function convertToDatabaseValue($value): ?string
     {
         if (null !== $value && false === is_array($value)) {
             throw MongoDBException::invalidValueForType('HashSecret', ['array', 'null'], $value);
@@ -28,7 +28,7 @@ class HashSecretType extends Type
         return $this->encrypt(json_encode($value, JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION));
     }
 
-    public function convertToPHPValue($value)
+    public function convertToPHPValue($value): ?array
     {
         return null !== $value ? json_decode($this->decrypt($value), true) : null;
     }
