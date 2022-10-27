@@ -4,10 +4,10 @@ namespace Oka\Doctrine\SecretTypeBundle\DependencyInjection\CompilerPass;
 
 use Oka\Doctrine\SecretTypeBundle\EventListener\DoctrineMongoDBListener;
 use Oka\Doctrine\SecretTypeBundle\EventListener\DoctrineORMListener;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Parameter;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 /**
  * @author Cedrick Oka Baidai <okacedrick@gmail.com>
@@ -15,16 +15,16 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 class DoctrineListenerPass implements CompilerPassInterface
 {
     private static array $doctrineDrivers = [
-//         'orm' => [
-//             'registry' => 'doctrine',
-//             'class' => DoctrineORMListener::class,
-//             'types' => [
-//                 'string_secret',
-//                 'json_secret',
-//             ],
-//             'tag' => 'doctrine.event_listener',
-//             'event' => 'postConnect',
-//         ],
+        'orm' => [
+            'registry' => 'doctrine',
+            'class' => DoctrineORMListener::class,
+            'types' => [
+                'string_secret',
+                'json_secret',
+            ],
+            'tag' => 'doctrine.event_listener',
+            'event' => 'postConnect',
+        ],
         'mongodb' => [
             'registry' => 'doctrine_mongodb',
             'class' => DoctrineMongoDBListener::class,
@@ -36,7 +36,7 @@ class DoctrineListenerPass implements CompilerPassInterface
             'event' => 'loadClassMetadata',
         ],
     ];
-    
+
     public function process(ContainerBuilder $container)
     {
         foreach (static::$doctrineDrivers as $key => $dbDriver) {
