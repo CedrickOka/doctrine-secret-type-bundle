@@ -10,6 +10,7 @@ abstract class AbstractDoctrineListener
     private $privateKeyFile;
     private $publicKeyFile;
     private $passphrase;
+
     protected $types;
 
     public function __construct(string $privateKeyFile, string $publicKeyFile, string $passphrase, array $types = [])
@@ -25,7 +26,6 @@ abstract class AbstractDoctrineListener
         $typeClass = $this->getTypeClass();
 
         foreach ($this->types as $type) {
-            dd($typeClass, $typeClass::hasType($type));
             if (true === $typeClass::hasType($type)) {
                 $typeClass::getType($type)
                         ->setPrivateKeyFile($this->privateKeyFile)

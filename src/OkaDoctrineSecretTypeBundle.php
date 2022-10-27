@@ -21,6 +21,6 @@ class OkaDoctrineSecretTypeBundle extends Bundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new DoctrineListenerPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION);
+        $container->addCompilerPass(new DoctrineListenerPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 255);
     }
 }

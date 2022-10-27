@@ -72,7 +72,6 @@ trait SecretTypeTrait
         $resource = fopen($this->privateKeyFile, 'r');
         $privateKey = openssl_get_privatekey(fread($resource, filesize($this->privateKeyFile)), $this->passphrase);
         fclose($resource);
-
         $data = base64_decode($data);
 
         while ($data) {
