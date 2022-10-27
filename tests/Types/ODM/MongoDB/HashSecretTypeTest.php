@@ -2,7 +2,7 @@
 
 namespace Oka\Doctrine\SecretTypeBundle\Tests\Types\ODM\MongoDB;
 
-use Doctrine\DBAL\Types\Type;
+use Doctrine\ODM\MongoDB\Types\Type;
 use Oka\Doctrine\SecretTypeBundle\Test\KernelTestCase;
 
 /**

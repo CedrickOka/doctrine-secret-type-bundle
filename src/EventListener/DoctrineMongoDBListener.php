@@ -2,23 +2,27 @@
 
 namespace Oka\Doctrine\SecretTypeBundle\EventListener;
 
+use Doctrine\ODM\MongoDB\Event\PreLoadEventArgs;
 use Doctrine\ODM\MongoDB\Types\Type;
+use Doctrine\Persistence\Event\LoadClassMetadataEventArgs;
 
 /**
  * @author Cedrick Oka Baidai <okacedrick@gmail.com>
  */
 class DoctrineMongoDBListener extends AbstractDoctrineListener
 {
-    protected function getTypeClassName(): string
+    public function preLoad(PreLoadEventArgs $args): void
     {
-        return Type::class;
+        $this->configureTypes();
     }
 
-    protected function getTypes(): array
+    public function loadClassMetadata(LoadClassMetadataEventArgs $args): void
     {
-        return [
-            'string_secret',
-            'hash_secret',
-        ];
+        $this->configureTypes();
+    }
+
+    protected function getTypeClass(): string
+    {
+        return Type::class;
     }
 }

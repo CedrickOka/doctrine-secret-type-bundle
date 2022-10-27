@@ -2,6 +2,7 @@
 
 namespace Oka\Doctrine\SecretTypeBundle\EventListener;
 
+use Doctrine\DBAL\Event\ConnectionEventArgs;
 use Doctrine\DBAL\Types\Type;
 
 /**
@@ -9,16 +10,13 @@ use Doctrine\DBAL\Types\Type;
  */
 class DoctrineORMListener extends AbstractDoctrineListener
 {
-    protected function getTypeClassName(): string
+    public function postConnect(ConnectionEventArgs $args): void
     {
-        return Type::class;
+        $this->configureTypes();
     }
 
-    protected function getTypes(): array
+    protected function getTypeClass(): string
     {
-        return [
-            'string_secret',
-            'json_secret',
-        ];
+        return Type::class;
     }
 }

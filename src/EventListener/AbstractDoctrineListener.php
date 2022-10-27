@@ -10,29 +10,30 @@ abstract class AbstractDoctrineListener
     private $privateKeyFile;
     private $publicKeyFile;
     private $passphrase;
+    protected $types;
 
-    public function __construct(string $privateKeyFile, string $publicKeyFile, string $passphrase)
+    public function __construct(string $privateKeyFile, string $publicKeyFile, string $passphrase, array $types = [])
     {
         $this->privateKeyFile = $privateKeyFile;
         $this->publicKeyFile = $publicKeyFile;
         $this->passphrase = $passphrase;
+        $this->types = $types;
     }
 
-    public function onKernelRequest(): void
+    protected function configureTypes(): void
     {
-        $typeClass = $this->getTypeClassName();
+        $typeClass = $this->getTypeClass();
 
-        foreach ($this->getTypes() as $type) {
+        foreach ($this->types as $type) {
+            dd($typeClass, $typeClass::hasType($type));
             if (true === $typeClass::hasType($type)) {
                 $typeClass::getType($type)
-                            ->setPrivateKeyFile($this->privateKeyFile)
-                            ->setPublicKeyFile($this->publicKeyFile)
-                            ->setPassphrase($this->passphrase);
+                        ->setPrivateKeyFile($this->privateKeyFile)
+                        ->setPublicKeyFile($this->publicKeyFile)
+                        ->setPassphrase($this->passphrase);
             }
         }
     }
 
-    abstract protected function getTypeClassName(): string;
-
-    abstract protected function getTypes(): array;
+    abstract protected function getTypeClass(): string;
 }

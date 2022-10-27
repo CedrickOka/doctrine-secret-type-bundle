@@ -13,9 +13,9 @@ class KernelTestCase extends BaseKernelTestCase
     {
         static::bootKernel();
 
-        /* @var \Oka\Doctrine\SecretTypeBundle\EventListener\DoctrineORMListener $listener */
-        static::$container->get('oka_doctrine_secret_type.orm.kernel_listener')->onKernelRequest();
-        /* @var \Oka\Doctrine\SecretTypeBundle\EventListener\DoctrineMongoDBListener $listener */
-        static::$container->get('oka_doctrine_secret_type.orm.kernel_listener')->onKernelRequest();
+        /** @var \Doctrine\ORM\EntityManagerInterface $em */
+        $em = static::$container->get('doctrine.orm.entity_manager');
+        /** @var \Doctrine\ODM\MongoDB\DocumentManager $dm */
+        $dm = static::$container->get('doctrine_mongodb.odm.document_manager');
     }
 }

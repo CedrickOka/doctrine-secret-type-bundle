@@ -19,13 +19,7 @@ class HashSecretType extends Type
             throw MongoDBException::invalidValueForType('HashSecret', ['array', 'null'], $value);
         }
 
-        return null !== $value ? (object) $value : null;
-
-        if (true === empty($value)) {
-            return null;
-        }
-
-        return $this->encrypt(json_encode($value, JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION));
+        return null !== $value ? $this->encrypt(json_encode($value, JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION)) : null;
     }
 
     public function convertToPHPValue($value): ?array

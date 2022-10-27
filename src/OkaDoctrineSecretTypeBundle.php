@@ -2,7 +2,7 @@
 
 namespace Oka\Doctrine\SecretTypeBundle;
 
-use Oka\Doctrine\SecretTypeBundle\DependencyInjection\CompilerPass\DoctrineTypePass;
+use Oka\Doctrine\SecretTypeBundle\DependencyInjection\CompilerPass\DoctrineListenerPass;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -21,6 +21,6 @@ class OkaDoctrineSecretTypeBundle extends Bundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new DoctrineTypePass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 255);
+        $container->addCompilerPass(new DoctrineListenerPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION);
     }
 }
