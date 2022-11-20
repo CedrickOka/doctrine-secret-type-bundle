@@ -23,7 +23,7 @@ abstract class AbstractDoctrineListener
 
     protected function configureTypes(): void
     {
-        $typeClass = $this->getTypeClass();
+        $typeClass = static::getTypeClass();
 
         foreach ($this->types as $type) {
             if (true === $typeClass::hasType($type)) {
@@ -35,5 +35,5 @@ abstract class AbstractDoctrineListener
         }
     }
 
-    abstract protected function getTypeClass(): string;
+    abstract protected static function getTypeClass(): string;
 }

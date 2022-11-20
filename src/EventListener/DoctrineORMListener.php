@@ -15,7 +15,7 @@ class DoctrineORMListener extends AbstractDoctrineListener
         $this->configureTypes();
     }
 
-    protected function getTypeClass(): string
+    protected static function getTypeClass(): string
     {
         return Type::class;
     }
