@@ -22,8 +22,12 @@ class DoctrineListenerPass implements CompilerPassInterface
                 'string_secret',
                 'json_secret',
             ],
-            'tag' => 'doctrine.event_listener',
-            'event' => 'postConnect',
+            'tags' => [
+                [
+                    'name' => 'doctrine.event_listener',
+                    'event' => 'postConnect',
+                ],
+            ],
         ],
         'mongodb' => [
             'registry' => 'doctrine_mongodb',
@@ -32,8 +36,24 @@ class DoctrineListenerPass implements CompilerPassInterface
                 'string_secret',
                 'hash_secret',
             ],
-            'tag' => 'doctrine_mongodb.odm.event_listener',
-            'event' => 'loadClassMetadata',
+            'tags' => [
+                [
+                    'name' => 'doctrine_mongodb.odm.event_listener',
+                    'event' => 'loadClassMetadata',
+                ],
+                [
+                    'name' => 'doctrine_mongodb.odm.event_listener',
+                    'event' => 'prePersist',
+                ],
+                [
+                    'name' => 'doctrine_mongodb.odm.event_listener',
+                    'event' => 'preUpdate',
+                ],
+                [
+                    'name' => 'doctrine_mongodb.odm.event_listener',
+                    'event' => 'preLoad',
+                ],
+            ],
         ],
     ];
 
@@ -44,20 +64,22 @@ class DoctrineListenerPass implements CompilerPassInterface
                 continue;
             }
 
-            $container
-                ->setDefinition(
-                    sprintf('oka_doctrine_secret_type.%s.doctrine_listener', $key),
-                    new Definition(
-                        $dbDriver['class'],
-                        [
-                            new Parameter('oka_doctrine_secret_type.private_key_file'),
-                            new Parameter('oka_doctrine_secret_type.public_key_file'),
-                            new Parameter('oka_doctrine_secret_type.passphrase'),
-                            $dbDriver['types'],
-                        ]
-                    )
+            $definition = $container->setDefinition(
+                sprintf('oka_doctrine_secret_type.%s.doctrine_listener', $key),
+                new Definition(
+                    $dbDriver['class'],
+                    [
+                        new Parameter('oka_doctrine_secret_type.private_key_file'),
+                        new Parameter('oka_doctrine_secret_type.public_key_file'),
+                        new Parameter('oka_doctrine_secret_type.passphrase'),
+                        $dbDriver['types'],
+                    ]
                 )
-                ->addTag($dbDriver['tag'], ['event' => $dbDriver['event']]);
+            );
+
+            foreach ($dbDriver['tags'] as $tag) {
+                $definition->addTag($tag['name'], ['event' => $tag['event']]);
+            }
         }
     }
 }
