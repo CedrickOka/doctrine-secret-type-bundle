@@ -4,10 +4,6 @@ namespace Oka\Doctrine\SecretTypeBundle\DependencyInjection\CompilerPass;
 
 use Oka\Doctrine\SecretTypeBundle\EventListener\DoctrineMongoDBListener;
 use Oka\Doctrine\SecretTypeBundle\EventListener\DoctrineORMListener;
-use Oka\Doctrine\SecretTypeBundle\Types\DBAL\JsonSecretType;
-use Oka\Doctrine\SecretTypeBundle\Types\DBAL\TextSecretType;
-use Oka\Doctrine\SecretTypeBundle\Types\ODM\MongoDB\HashSecretType;
-use Oka\Doctrine\SecretTypeBundle\Types\ODM\MongoDB\StringSecretType;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -23,8 +19,8 @@ class DoctrineListenerPass implements CompilerPassInterface
             'registry' => 'doctrine',
             'class' => DoctrineORMListener::class,
             'types' => [
-                TextSecretType::TEXT_SECRET,
-                JsonSecretType::JSON_SECRET,
+                'text_secret',
+                'json_secret',
             ],
             'tags' => [
                 [
@@ -37,8 +33,8 @@ class DoctrineListenerPass implements CompilerPassInterface
             'registry' => 'doctrine_mongodb',
             'class' => DoctrineMongoDBListener::class,
             'types' => [
-                StringSecretType::STRING_SECRET,
-                HashSecretType::HASH_SECRET,
+                'string_secret',
+                'hash_secret',
             ],
             'tags' => [
                 [
