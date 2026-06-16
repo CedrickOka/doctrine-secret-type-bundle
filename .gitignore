@@ -1,5 +1,5 @@
 ### Certificates ###
-/config/coka_doctrine_secret_type
+/config/certificates
 
 ### Composer ###
 .phpunit.*

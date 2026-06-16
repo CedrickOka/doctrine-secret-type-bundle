@@ -7,18 +7,12 @@ namespace Oka\Doctrine\SecretTypeBundle\EventListener;
  */
 abstract class AbstractDoctrineListener
 {
-    private $privateKeyFile;
-    private $publicKeyFile;
-    private $passphrase;
-
-    protected $types;
-
-    public function __construct(string $privateKeyFile, string $publicKeyFile, string $passphrase, array $types = [])
-    {
-        $this->privateKeyFile = $privateKeyFile;
-        $this->publicKeyFile = $publicKeyFile;
-        $this->passphrase = $passphrase;
-        $this->types = $types;
+    public function __construct(
+        private string $privateKeyFile,
+        private string $publicKeyFile,
+        private string $passphrase,
+        protected array $types = [],
+    ) {
     }
 
     protected function configureTypes(): void

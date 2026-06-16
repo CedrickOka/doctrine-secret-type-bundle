@@ -13,6 +13,8 @@ class JsonSecretType extends JsonType
 {
     use SecretTypeTrait;
 
+    public const JSON_SECRET = 'json_secret';
+
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform): string
     {
         return $platform->getClobTypeDeclarationSQL($fieldDeclaration);
@@ -45,7 +47,7 @@ class JsonSecretType extends JsonType
 
     public function getName(): string
     {
-        return 'json_secret';
+        return self::JSON_SECRET;
     }
 
     public function requiresSQLCommentHint(AbstractPlatform $platform): bool

@@ -3,7 +3,7 @@ framework:
     secret: 'secret'
     default_locale: 'fr'
     session:
-        storage_id: session.storage.mock_file
+        storage_factory_id: session.storage.factory.mock_file
     php_errors:
         log: true
 
@@ -25,15 +25,15 @@ framework:
 doctrine:
     dbal:
         types:
-            string_secret: 'Oka\Doctrine\SecretTypeBundle\Types\DBAL\StringSecretType'
+            text_secret: 'Oka\Doctrine\SecretTypeBundle\Types\DBAL\TextSecretType'
             json_secret: 'Oka\Doctrine\SecretTypeBundle\Types\DBAL\JsonSecretType'
         connections:
             default:
                 driver: 'pdo_sqlite'
                 url: '%env(resolve:DATABASE_URL)%'
-                mapping_types:
-                    string_secret: text
-                    json_secret: text
+#                mapping_types:
+#                    text_secret: text
+#                    json_secret: text
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
@@ -41,7 +41,7 @@ doctrine:
         mappings:
             App:
                 is_bundle: false
-                type: annotation
+                type: attribute
                 dir: '%kernel.project_dir%/tests/Entity'
                 prefix: 'Oka\Doctrine\SecretTypeBundle\Tests\Entity'
                 alias: App
@@ -63,7 +63,7 @@ doctrine_mongodb:
             mappings:
                 App:
                     is_bundle: false
-                    type: annotation
+                    type: attribute
                     dir: '%kernel.project_dir%/tests/Document'
                     prefix: 'Oka\Doctrine\SecretTypeBundle\Tests\Document'
                     alias: App

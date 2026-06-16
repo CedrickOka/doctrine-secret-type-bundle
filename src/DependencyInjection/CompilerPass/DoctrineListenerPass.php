@@ -4,6 +4,10 @@ namespace Oka\Doctrine\SecretTypeBundle\DependencyInjection\CompilerPass;
 
 use Oka\Doctrine\SecretTypeBundle\EventListener\DoctrineMongoDBListener;
 use Oka\Doctrine\SecretTypeBundle\EventListener\DoctrineORMListener;
+use Oka\Doctrine\SecretTypeBundle\Types\DBAL\JsonSecretType;
+use Oka\Doctrine\SecretTypeBundle\Types\DBAL\TextSecretType;
+use Oka\Doctrine\SecretTypeBundle\Types\ODM\MongoDB\HashSecretType;
+use Oka\Doctrine\SecretTypeBundle\Types\ODM\MongoDB\StringSecretType;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -19,8 +23,8 @@ class DoctrineListenerPass implements CompilerPassInterface
             'registry' => 'doctrine',
             'class' => DoctrineORMListener::class,
             'types' => [
-                'string_secret',
-                'json_secret',
+                TextSecretType::TEXT_SECRET,
+                JsonSecretType::JSON_SECRET,
             ],
             'tags' => [
                 [
@@ -33,8 +37,8 @@ class DoctrineListenerPass implements CompilerPassInterface
             'registry' => 'doctrine_mongodb',
             'class' => DoctrineMongoDBListener::class,
             'types' => [
-                'string_secret',
-                'hash_secret',
+                StringSecretType::STRING_SECRET,
+                HashSecretType::HASH_SECRET,
             ],
             'tags' => [
                 [
@@ -57,7 +61,7 @@ class DoctrineListenerPass implements CompilerPassInterface
         ],
     ];
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         foreach (static::$doctrineDrivers as $key => $dbDriver) {
             if (false === $container->hasDefinition($dbDriver['registry'])) {

@@ -21,9 +21,9 @@
 		<env name="DATABASE_URL" value="sqlite:///:memory:"/>
 		<env name="MONGODB_URL" value="mongodb://localhost:27017"/>
 		<env name="MONGODB_DB" value="db_name"/>
-		<env name="OKA_SECRET_TYPE_PRIVATE_KEY_FILE" value="%kernel.project_dir%/config/coka_doctrine_secret_type/private.pem"/>
-		<env name="OKA_SECRET_TYPE_PUBLIC_KEY_FILE" value="%kernel.project_dir%/config/coka_doctrine_secret_type/public.pem"/>
-		<env name="OKA_SECRET_TYPE_PASSPHRASE" value="2c50386cee0fe33ca8dcd0e7c4a7a008"/>
+		<env name="OKA_SECRET_TYPE_PRIVATE_KEY_FILE" value="%kernel.project_dir%/config/certificates/private.pem"/>
+		<env name="OKA_SECRET_TYPE_PUBLIC_KEY_FILE" value="%kernel.project_dir%/config/certificates/public.pem"/>
+		<env name="OKA_SECRET_TYPE_PASSPHRASE" value="b472808bc4e0284e919410c7d5b3458b74754f22f9dd9370f84140cb5e41d910"/>
 	</php>
 
 	<testsuites>

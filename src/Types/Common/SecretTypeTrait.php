@@ -22,7 +22,7 @@ trait SecretTypeTrait
     /**
      * @var string
      */
-    private $passphrase = null;
+    private $passphrase;
 
     public function setPrivateKeyFile(string $privateKeyFile): self
     {

@@ -12,7 +12,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * @author Beno!t POLASZEK <bpolaszek@gmail.com>
+ * @author Benoit POLASZEK <bpolaszek@gmail.com>
  * @author Cedrick Oka Baidai <cedric.baidai@veone.net>
  */
 #[AsCommand(name: 'coka:doctrine:secret:type:generate-keypair', description: 'Generate public/private keys for use in your application.')]
@@ -30,35 +30,9 @@ final class GenerateKeyPairCommand extends Command
         'ES512',
     ];
 
-    protected static $defaultName = 'coka:doctrine:secret:type:generate-keypair';
-
-    /**
-     * @var string|null
-     */
-    private $privateKeyFile;
-
-    /**
-     * @var string|null
-     */
-    private $publicKeyFile;
-
-    /**
-     * @var string|null
-     */
-    private $passphrase;
-
-    /**
-     * @var string
-     */
-    private $algorithm;
-
-    public function __construct(?string $privateKeyFile, ?string $publicKeyFile, ?string $passphrase)
+    public function __construct(private string $privateKeyFile, private string $publicKeyFile, private string $passphrase)
     {
         parent::__construct();
-
-        $this->privateKeyFile = $privateKeyFile;
-        $this->publicKeyFile = $publicKeyFile;
-        $this->passphrase = $passphrase;
     }
 
     protected function configure(): void
@@ -155,6 +129,7 @@ final class GenerateKeyPairCommand extends Command
             throw new \RuntimeException(\openssl_error_string());
         }
 
+        $privateKey = null;
         $success = \openssl_pkey_export($resource, $privateKey, $passphrase);
 
         if (false === $success) {

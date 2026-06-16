@@ -13,6 +13,8 @@ class HashSecretType extends Type
 {
     use SecretTypeTrait;
 
+    public const HASH_SECRET = 'hash_secret';
+
     public function convertToDatabaseValue($value): ?string
     {
         if (null !== $value && false === is_array($value)) {
@@ -29,12 +31,12 @@ class HashSecretType extends Type
 
     public function closureToPHP(): string
     {
-        return '$type = \Doctrine\ODM\MongoDB\Types\Type::getType(\'hash_secret\');
+        return '$type = \Doctrine\ODM\MongoDB\Types\Type::getType(\Oka\Doctrine\SecretTypeBundle\Types\ODM\MongoDB\HashSecretType::HASH_SECRET);
 				$return = $type->convertToPHPValue($value);';
     }
 
     public function getName(): string
     {
-        return 'hash_secret';
+        return self::HASH_SECRET;
     }
 }

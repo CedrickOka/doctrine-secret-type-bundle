@@ -9,9 +9,11 @@ use Oka\Doctrine\SecretTypeBundle\Types\Common\SecretTypeTrait;
 /**
  * @author Cedrick Oka Baidai <okacedrick@gmail.com>
  */
-class StringSecretType extends TextType
+class TextSecretType extends TextType
 {
     use SecretTypeTrait;
+
+    public const TEXT_SECRET = 'text_secret';
 
     public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
@@ -40,6 +42,6 @@ class StringSecretType extends TextType
 
     public function getName(): string
     {
-        return 'string_secret';
+        return self::TEXT_SECRET;
     }
 }

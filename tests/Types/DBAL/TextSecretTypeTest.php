@@ -4,33 +4,33 @@ namespace Oka\Doctrine\SecretTypeBundle\Tests\Types\DBAL;
 
 use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Oka\Doctrine\SecretTypeBundle\Test\DBALTypeTestCase;
-use Oka\Doctrine\SecretTypeBundle\Types\DBAL\JsonSecretType;
+use Oka\Doctrine\SecretTypeBundle\Types\DBAL\TextSecretType;
 
 /**
  * @author Cedrick Oka Baidai <okacedrick@gmail.com>
  */
-class JsonSecretTypeTest extends DBALTypeTestCase
+class TextSecretTypeTest extends DBALTypeTestCase
 {
     /**
      * @covers
      */
     public function testThatWeEncryptValue()
     {
-        /** @var JsonSecretType $type */
+        /** @var TextSecretType $type */
         $type = $this->getType();
-        $dbValue = $type->convertToDatabaseValue(['greeting' => 'Hello World!'], new MySQLPlatform());
+        $dbValue = $type->convertToDatabaseValue('Hello World!', new MySQLPlatform());
         $phpValue = $type->convertToPHPValue($dbValue, new MySQLPlatform());
 
-        $this->assertEquals(['greeting' => 'Hello World!'], $phpValue);
+        $this->assertEquals('Hello World!', $phpValue);
     }
 
     protected function getTypeClass(): string
     {
-        return JsonSecretType::class;
+        return TextSecretType::class;
     }
 
     protected function getTypeName(): string
     {
-        return JsonSecretType::JSON_SECRET;
+        return TextSecretType::TEXT_SECRET;
     }
 }

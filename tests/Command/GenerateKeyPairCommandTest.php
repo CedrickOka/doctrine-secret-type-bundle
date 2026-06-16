@@ -2,7 +2,6 @@
 
 namespace Oka\Doctrine\SecretTypeBundle\Tests\Command;
 
-use Oka\Doctrine\SecretTypeBundle\Command\GenerateKeyPairCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -20,7 +19,7 @@ class GenerateKeyPairCommandTest extends KernelTestCase
         $kernel = static::createKernel();
         $application = new Application($kernel);
 
-        $command = $application->find(GenerateKeyPairCommand::getDefaultName());
+        $command = $application->find('coka:doctrine:secret:type:generate-keypair');
         $commandTester = new CommandTester($command);
         $commandTester->execute(['--overwrite' => true]);
 
