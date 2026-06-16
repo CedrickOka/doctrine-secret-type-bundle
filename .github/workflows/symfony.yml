@@ -20,10 +20,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - php_version: "7.4"
-            symfony_version: "4.4"
-            stability: "stable"
-            composer_extra_args: "--ignore-platform-req=ext-mongodb"
           - php_version: "8.1"
             symfony_version: "5.4"
             stability: "stable"
